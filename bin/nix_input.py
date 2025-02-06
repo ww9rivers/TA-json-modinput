@@ -2,7 +2,7 @@ import sys
 import os
 import json
 import subprocess
-import splunklib.modularinput as smi
+from splunklib import modularinput as smi
 
 class NixInputScript(smi.Script):
 
