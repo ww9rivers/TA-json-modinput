@@ -21,6 +21,7 @@ class NixInputScript(smi.Script):
 
     def stream_events(self, inputs, ew):
         instance_name = list(inputs.inputs.keys())[0]
+        ew.log(smi.logging.INFO, "Starting nix_input modular input.")
 
         try:
             result = subprocess.run(["/common/bin/ni", "--tojson"], capture_output=True, text=True, check=True)
@@ -36,7 +37,7 @@ class NixInputScript(smi.Script):
                     source=instance_name
                 )
                 ew.write_event(event)
-
+            ew.log(smi.logging.INFO, f"Finished nix_input modular input: {len(elements)}.")
         except subprocess.CalledProcessError as e:
             ew.log(smi.logging.ERROR, f"Error executing nix: {e}")
         except json.JSONDecodeError:
