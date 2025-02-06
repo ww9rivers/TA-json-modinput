@@ -1,0 +1,6 @@
+__pycache__/
+lib/packaging/
+lib/packaging*/
+lib/deprecation*/
+lib/splunk_sdk*/
+lib/deprecation.py
