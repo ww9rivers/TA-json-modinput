@@ -2,6 +2,7 @@ import sys
 import os
 import json
 import subprocess
+from modNixInput import nix_input
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(current_dir, "splunklib"))
@@ -27,11 +28,7 @@ class NixInputScript(smi.Script):
         ew.log(smi.logging.INFO, "Starting nix_input modular input.")
 
         try:
-            result = subprocess.run(["/common/bin/ni", "--tojson"], capture_output=True, text=True, check=True)
-            json_output = result.stdout
-
-            elements = json.loads(json_output) if json_output else []
-
+            elements = nix_input()
             for element in elements:
                 # Create a Splunk event for each JSON element
                 event = smi.Event(
