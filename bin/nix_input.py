@@ -11,10 +11,13 @@ class NixInputScript(smi.Script):
 
     def get_scheme(self):
         scheme = smi.Scheme("Nix Input")
-        scheme.description = "Runs the 'nix' command and ingests its JSON output."
+        scheme.description = "Runs the 'ni' command and ingests its JSON output."
         scheme.use_external_validation = True
         scheme.streaming_mode_xml = True
         return scheme
+
+    def get_app_name(self):
+        return "TA-hits-unix-ni"
 
     def validate_input(self, validation_definition):
         pass
