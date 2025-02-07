@@ -1,7 +1,5 @@
 import sys
 import os
-import json
-import subprocess
 from modNixInput import nix_input
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
