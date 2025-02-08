@@ -1,4 +1,4 @@
-def parse_items_file(filename='/common/etc/node_masterfile.stz'):
+def nix_input(filename='/common/etc/node_masterfile.stz'):
     """
     Parse a file containing items with attributes in the format:
     item_name:
