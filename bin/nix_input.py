@@ -37,10 +37,10 @@ class NixInputScript(smi.Script):
                 )
                 ew.write_event(event)
             ew.log(smi.logging.INFO, f"Finished nix_input modular input: {len(elements)}.")
-        except subprocess.CalledProcessError as e:
-            ew.log(smi.logging.ERROR, f"Error executing nix: {e}")
         except json.JSONDecodeError:
             ew.log(smi.logging.ERROR, "Failed to parse JSON.")
+        except Exception as e:
+            ew.log(smi.logging.ERROR, f"Error: {e}")
 
 if __name__ == "__main__":
     sys.exit(NixInputScript().run(sys.argv))
