@@ -10,7 +10,7 @@ from splunklib import modularinput as smi
 class NixInputScript(smi.Script):
 
     def get_scheme(self):
-        scheme = smi.Scheme("Nix Input")
+        scheme = smi.Scheme("nix_input")
         scheme.description = "Runs the 'ni' command and ingests its JSON output."
         scheme.use_external_validation = True
         scheme.streaming_mode_xml = True
