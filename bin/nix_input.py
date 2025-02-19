@@ -15,7 +15,7 @@ class NixInputScript(smi.Script):
         scheme.description = "Read the 'ni' command source and ingest as JSON."
         scheme.use_external_validation = True
         scheme.use_single_instance = True
-        scheme.streaming_mode_xml = True
+        scheme.streaming_mode = "simple"
         return scheme
 
     def get_app_name(self):
