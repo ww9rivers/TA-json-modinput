@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import logging
 from modNixInput import nix_input
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -25,7 +26,7 @@ class NixInputScript(smi.Script):
 
     def stream_events(self, inputs, ew):
         instance_name = list(inputs.inputs.keys())[0]
-        ew.log(smi.logging.INFO, "Starting nix_input modular input.")
+        ew.log(logging.INFO, "Starting nix_input modular input.")
 
         try:
             elements = nix_input()
@@ -37,11 +38,11 @@ class NixInputScript(smi.Script):
                     source=instance_name
                 )
                 ew.write_event(event)
-            ew.log(smi.logging.INFO, f"Finished nix_input modular input: {len(elements)}.")
+            ew.log(logging.INFO, f"Finished nix_input modular input: {len(elements)}.")
         except json.JSONDecodeError:
-            ew.log(smi.logging.ERROR, "Failed to parse JSON.")
+            ew.log(logging.ERROR, "Failed to parse JSON.")
         except Exception as e:
-            ew.log(smi.logging.ERROR, f"Error: {e}")
+            ew.log(logging.ERROR, f"Error: {e}")
 
 if __name__ == "__main__":
     sys.exit(NixInputScript().run(sys.argv))
