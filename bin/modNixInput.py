@@ -10,7 +10,7 @@ def nix_input(filename='/app/var/log/node_masterfile.stz'):
     Returns:
         dict: Dictionary where keys are item names and values are dictionaries of attributes
     """
-    items = {}
+    items = []
     current_item = None
 
     with open(filename, 'r') as file:
@@ -23,8 +23,8 @@ def nix_input(filename='/app/var/log/node_masterfile.stz'):
 
             # Check if this is an item definition (ends with colon)
             if line.endswith(':'):
-                current_item = line[:-1]  # Remove the colon
-                items[current_item] = {}
+                current_item = { 'hostname': line[:-1].strip() } # Remove the colon
+                items.append(current_item)
                 continue
 
             # If we have an attribute line
@@ -32,5 +32,5 @@ def nix_input(filename='/app/var/log/node_masterfile.stz'):
                 # Split and clean up the attribute-value pair
                 attr_name, attr_value = [x.strip() for x in line.split('=', 1)]
                 # Store the attribute
-                items[current_item][attr_name] = attr_value
+                current_item[attr_name] = attr_value
     return items
