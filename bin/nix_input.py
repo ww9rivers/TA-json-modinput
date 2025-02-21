@@ -26,16 +26,19 @@ class NixInputScript(smi.Script):
 
     def stream_events(self, inputs, ew):
         instance_name = list(inputs.inputs.keys())[0]
-        instance_index = inputs.inputs[instance_name]["index"] or "unix_summary"
+        config = inputs.inputs[instance_name]
+        instance_index = config["index"] or "main"
+        filename = config["file"] or '/app/var/log/masterfile'
+        instance_type = config["sourcetype"] or "unix:hosts:json"
         ew.log(logging.INFO, f"Starting nix_input modular input: {instance_name}.")
 
         try:
-            elements = nix_input()
+            elements = nix_input(filename)
             for element in elements:
                 # Create a Splunk event for each JSON element
                 event = smi.Event(
                     data=json.dumps(element,separators=(',',':'))+"\n",
-                    sourcetype="hits:unix:hosts",
+                    sourcetype=instance_type,
                     index=instance_index,
                     source=instance_name
                 )

@@ -1,4 +1,4 @@
-def nix_input(filename='/app/var/log/node_masterfile.stz'):
+def nix_input(filename):
     """
     Parse a file containing items with attributes in the format:
     item_name:
