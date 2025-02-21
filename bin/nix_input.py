@@ -34,7 +34,7 @@ class NixInputScript(smi.Script):
             for element in elements:
                 # Create a Splunk event for each JSON element
                 event = smi.Event(
-                    data=json.dumps(element,separators=(',',':')),
+                    data=json.dumps(element,separators=(',',':'))+"\n",
                     sourcetype="hits:unix:hosts",
                     index=instance_index,
                     source=instance_name
