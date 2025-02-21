@@ -26,7 +26,8 @@ class NixInputScript(smi.Script):
 
     def stream_events(self, inputs, ew):
         instance_name = list(inputs.inputs.keys())[0]
-        ew.log(logging.INFO, "Starting nix_input modular input.")
+        instance_index = inputs.inputs[instance_name]["index"] or "unix_summary"
+        ew.log(logging.INFO, f"Starting nix_input modular input: {instance_name}.")
 
         try:
             elements = nix_input()
@@ -35,6 +36,7 @@ class NixInputScript(smi.Script):
                 event = smi.Event(
                     data=json.dumps(element)+"\n",
                     sourcetype="hits:unix:hosts",
+                    index=instance_index,
                     source=instance_name
                 )
                 ew.write_event(event)
