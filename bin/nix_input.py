@@ -39,6 +39,7 @@ class NixInputScript(smi.Script):
                     index=instance_index,
                     source=instance_name
                 )
+                event.stanza = instance_name
                 ew.write_event(event)
             ew.log(logging.INFO, f"Finished nix_input modular input: {len(elements)}.")
         except json.JSONDecodeError:
