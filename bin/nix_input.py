@@ -27,9 +27,9 @@ class NixInputScript(smi.Script):
     def stream_events(self, inputs, ew):
         instance_name = list(inputs.inputs.keys())[0]
         config = inputs.inputs[instance_name]
-        instance_index = config["index"] or "main"
-        filename = config["file"] or '/app/var/log/masterfile'
-        instance_type = config["sourcetype"] or "unix:hosts:json"
+        instance_index = config.get("index") or "main"
+        filename = config.get("file") or '/app/var/log/masterfile'
+        instance_type = config.get("sourcetype") or "unix:hosts:json"
         ew.log(logging.INFO, f"Starting nix_input modular input: {instance_name}.")
 
         try:
